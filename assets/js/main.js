@@ -17,7 +17,7 @@ clearBtn.addEventListener("click", clearInput);
 function addTodo(e) {
   e.preventDefault();
   if (!todoInput.classList.contains("edit")) {
-    if (todoInput.value.trim()) {
+    if (todoInput.value) {
       let todoId = localStorage.getItem("todos")
         ? JSON.parse(localStorage.getItem("todos"))
         : [];
@@ -142,7 +142,7 @@ function removeTodos(todo) {
 }
 function editTodos(todo) {
   addTodoBtn.addEventListener("click", () => {
-    if (todoInput.value.trim()) {
+    if (todoInput.value) {
       if (todoInput.classList.contains("edit")) {
         let todos = localStorage.getItem("todos")
           ? JSON.parse(localStorage.getItem("todos"))
