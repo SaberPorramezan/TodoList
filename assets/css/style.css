@@ -1,0 +1,152 @@
+@import url(./fonts.css);
+
+/* Resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "iransansfan";
+  list-style: none;
+}
+/* Variables */
+:root {
+  --primaryColor: #6d28d9;
+  --secondaryColor: #ede9fe;
+  --mainWhite: #ffffff;
+  --mainBlack: #222;
+  --mainGray: #7c7c7c;
+  --mainRed: #db2777;
+  --bodyColor: #f6f6f6;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+}
+body {
+  color: var(--mainBlack);
+  background-color: var(--bodyColor);
+  font-family: "iransansfan";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header {
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.form-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.todo-form {
+  width: 40vw;
+  height: 3rem;
+  border-radius: 0.3rem;
+  background-color: var(--mainWhite);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+button,
+input {
+  border: none;
+  outline: none;
+}
+.todo-input {
+  padding-right: 1rem;
+  height: 100%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: transparent;
+  flex: 1;
+}
+.todo-btn {
+  width: 3rem;
+  height: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fa-circle-plus {
+  font-size: 1.2rem;
+  color: var(--primaryColor);
+}
+
+.clear-input {
+  width: 2rem;
+  height: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.fa-eraser {
+  font-size: 1.2rem;
+  color: var(--mainRed);
+}
+
+.todo-list {
+  margin-top: 0.5rem;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.todo {
+  border-radius: 0.3rem;
+  padding-right: 0.5rem;
+  width: 100%;
+  background-color: var(--secondaryColor);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.todo li {
+  flex: 1;
+}
+.todo span {
+  display: block;
+  font-size: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.fa-trash-alt {
+  color: var(--mainRed);
+}
+.fa-check-square,
+.fa-edit {
+  color: var(--primaryColor);
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.not-found {
+  margin-top: 0.5rem;
+  border-radius: 0.3rem;
+  width: 30vw;
+  height: 50px;
+  background-color: var(--secondaryColor);
+  color: var(--mainBlack);
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
