@@ -16,24 +16,50 @@ clearBtn.addEventListener("click", clearInput);
 // event Functions
 function addTodo(e) {
   e.preventDefault();
-  if (!todoInput.classList.contains("edit")) {
-    if (todoInput.value.length >= 0) {
-      let todoId = localStorage.getItem("todos")
-        ? JSON.parse(localStorage.getItem("todos"))
-        : [];
-      const todoDive = document.createElement("div");
-      todoDive.classList.add("todo");
-      const newTodo = `<li id=${todoId.length}>${todoInput.value}</li>
+  if (todoInput.value.length) {
+    if (!todoInput.classList.contains("edit")) {
+      if (todoInput.value.length >= 0) {
+        let todoId = localStorage.getItem("todos")
+          ? JSON.parse(localStorage.getItem("todos"))
+          : [];
+        const todoDive = document.createElement("div");
+        todoDive.classList.add("todo");
+        const newTodo = `<li id=${todoId.length}>${todoInput.value}</li>
             <span><i class="far fa-check-square"></i></span>
             <span><i class="far fa-edit"></i></span>
             <span><i class="far fa-trash-alt"></i></span>`;
-      todoDive.innerHTML = newTodo;
-      todoList.appendChild(todoDive);
-      setTodos(todoId.length, todoInput.value);
-      todoInput.value = "";
+        todoDive.innerHTML = newTodo;
+        todoList.appendChild(todoDive);
+        setTodos(todoId.length, todoInput.value);
+        todoInput.value = "";
+      } else {
+        alert("چیزی وارد نشده است !");
+      }
     } else {
-      alert("چیزی وارد نشده است !");
+      const todoLists = [...todoList.childNodes];
+      let edit = localStorage.getItem("edit")
+        ? JSON.parse(localStorage.getItem("edit"))
+        : [];
+      let todos = localStorage.getItem("todos")
+        ? JSON.parse(localStorage.getItem("todos"))
+        : [];
+      todos.filter((t) => {
+        if (t.id == edit[0].id) {
+          t.value = todoInput.value;
+        }
+      });
+      localStorage.setItem("todos", JSON.stringify(todos));
+      todoLists.forEach((todo) => {
+        if (todo.children[0].id == edit[0].id) {
+          todo.children[0].innerHTML = todoInput.value;
+        }
+      });
+      todoInput.value = "";
+      todoInput.classList.remove("edit");
+      clearBtn.style.display = "none";
     }
+  } else {
+    alert("چیزی وارد نشده است !");
   }
 }
 function todoOptions(e) {
@@ -50,10 +76,6 @@ function todoOptions(e) {
     todo.remove();
   } else if (classList[1] === "fa-edit") {
     if (!todo.children[0].parentElement.classList.contains("completed")) {
-      clearBtn.style.display = "flex";
-      todoInput.classList.toggle("edit");
-      todoInput.value = todo.children[0].innerHTML;
-      todoInput.focus();
       editTodos(todo);
     }
   }
@@ -141,26 +163,13 @@ function removeTodos(todo) {
   localStorage.setItem("todos", JSON.stringify(filteredTodos));
 }
 function editTodos(todo) {
-  addTodoBtn.addEventListener("click", () => {
-    if (todoInput.value.length >= 0) {
-      if (todoInput.classList.contains("edit")) {
-        let todos = localStorage.getItem("todos")
-          ? JSON.parse(localStorage.getItem("todos"))
-          : [];
-        todos.filter((t) => {
-          if (todo.children[0].id == t.id) {
-            t.value = todoInput.value;
-          }
-        });
-        localStorage.setItem("todos", JSON.stringify(todos));
-        console.log(todos);
-        todo.children[0].innerHTML = todoInput.value;
-        todoInput.value = "";
-        todoInput.classList.remove("edit");
-        clearBtn.style.display = "none";
-      }
-    } else {
-      alert("چیزی وارد نشده است !");
-    }
-  });
+  todoInput.classList.toggle("edit");
+  todoInput.value = todo.children[0].innerHTML;
+  clearBtn.style.display = "flex";
+  todoInput.focus();
+  let edit = localStorage.getItem("edit")
+    ? JSON.parse(localStorage.getItem("edit"))
+    : [];
+  edit = [{ id: todo.children[0].id, value: todo.children[0].innerHTML }];
+  localStorage.setItem("edit", JSON.stringify(edit));
 }
