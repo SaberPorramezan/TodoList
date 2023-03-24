@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", getTodos);
 // event Listener
 addTodoBtn.addEventListener("click", addTodo);
 todoList.addEventListener("click", todoOptions);
-filterTodo.addEventListener("click", filters);
+filterTodo.addEventListener("change", filters);
 clearBtn.addEventListener("click", clearInput);
 // event Functions
 function addTodo(e) {
