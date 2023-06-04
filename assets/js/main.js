@@ -37,10 +37,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
 function createTodos(todos) {
   let result = "";
   todos.forEach((todo) => {
-    result += `<li class="todo">
-            <p class="todo__title ${todo.isCompleted && "completed"} ${
-      todo.edit && "edit"
-    }">${todo.titel}</p>
+    result += `<li class="todo ${todo.isCompleted && "completed"}">
+            <div class="status"></div>
+            <p class="todo__title">${todo.titel}</p>
             <div class="todo__options">
               <div class="todo__btns">
                 <button class="todo__check" data-todo-id=${todo.id}>
